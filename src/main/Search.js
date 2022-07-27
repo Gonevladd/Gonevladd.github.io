@@ -1,6 +1,7 @@
 import React from "react";
 import {InputGroup, Form, Button} from "react-bootstrap";
 import myStyle from './style.css'
+import axios from "axios";
 
 
 let searchValue;
@@ -11,6 +12,12 @@ function handleSearchInput(event){
 
 function handleSearchButton(event){
     console.log(searchValue);
+    connectToBackend();
+}
+
+function connectToBackend(){
+    axios.post('http://localhost:4000/test', {searchValue})
+        .then(res => console.log(res))
 }
 
 
