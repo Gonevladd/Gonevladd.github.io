@@ -11,3 +11,8 @@
     font-weight: bold;
     margin-top: 200px;
 }
+
+#img_item{
+    height: 400px;
+    max-width: 300px;
+}

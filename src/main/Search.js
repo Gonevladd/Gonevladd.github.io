@@ -1,8 +1,9 @@
 import React from "react";
 import {Component} from "react";
-import {InputGroup, Form, Button, Image} from "react-bootstrap";
+import {InputGroup, Form, Button, Image, Row} from "react-bootstrap";
 import myStyle from './style.css'
 import axios from "axios";
+import RenderItem from "./RenderItem";
 
 
 
@@ -54,7 +55,7 @@ export default class Search extends Component{
 
             console.log(this.state.result);
 
-            this.setState( () => ({result: response.data.d[0].l, imageUrl: response.data.d[0].i.imageUrl}));
+            this.setState( () => ({result: response.data.d, imageUrl: response.data.d}));
 
         }).catch(function (error) {
             console.error(error);
@@ -79,8 +80,21 @@ export default class Search extends Component{
                 </InputGroup>
 
 
-                <h1>{this.state.result === "Not yet" ? null : this.state.result}</h1>
-                <Image src={this.state.imageUrl}></Image>
+                <Row xs={1} md={1} className="g-4">
+                            {
+                                this.state.result !== "Not yet" ? this.state.result.map((value, index) => {
+                                    try {
+                                        console.log(value.i.imageUrl);
+                                        return <RenderItem label={value.l} imgSrc={value.i.imageUrl}/>
+                                    }catch (e) {
+                                        console.log(e);
+                                    }
+
+                                }) : null
+                            }
+                </Row>
+
+                {/*{this.state.imageUrl !== "Not yet" ? <Image src={this.state.imageUrl} id="img_item"></Image> : null}*/}
             </>
         );
     }
