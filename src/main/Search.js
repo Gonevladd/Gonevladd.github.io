@@ -4,6 +4,7 @@ import {InputGroup, Form, Button, Image, Row} from "react-bootstrap";
 import myStyle from './style.css'
 import axios from "axios";
 import RenderItem from "./RenderItem";
+import mainColor from "./MainColor";
 
 
 
@@ -24,6 +25,7 @@ export default class Search extends Component{
             result: "Not yet",
             imageUrl: "Not yet",
         };
+
         this.handleSearchButton = this.handleSearchButton.bind(this);
     }
 
@@ -74,7 +76,7 @@ export default class Search extends Component{
                         id="search-input"
                         onChange={this.handleSearchInput}
                     />
-                    <Button variant="outline-success" id="button-addon2" onClick={this.handleSearchButton}>
+                    <Button variant={"outline-"+mainColor.getColor()} id="button-addon2" onClick={this.handleSearchButton}>
                         Find!
                     </Button>
                 </InputGroup>
@@ -85,7 +87,7 @@ export default class Search extends Component{
                                 this.state.result !== "Not yet" ? this.state.result.map((value, index) => {
                                     try {
                                         console.log(value.i.imageUrl);
-                                        return <RenderItem label={value.l} imgSrc={value.i.imageUrl}/>
+                                        return <RenderItem label={value.l} imgSrc={value.i.imageUrl} actors={value.s} year={value.y} rank={value.rank} type={value.q}/>
                                     }catch (e) {
                                         console.log(e);
                                     }
@@ -93,8 +95,6 @@ export default class Search extends Component{
                                 }) : null
                             }
                 </Row>
-
-                {/*{this.state.imageUrl !== "Not yet" ? <Image src={this.state.imageUrl} id="img_item"></Image> : null}*/}
             </>
         );
     }

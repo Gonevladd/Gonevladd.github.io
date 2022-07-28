@@ -13,6 +13,18 @@
 }
 
 #img_item{
+    text-align: center;
     height: 400px;
     max-width: 300px;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-left: 100px;
+    margin-bottom: 250px;
+}
+
+#apply_btn{
+    border-radius: 25px;
+    position: absolute;
+    left: 300px;
+    top: 10px;
 }
