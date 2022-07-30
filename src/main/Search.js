@@ -5,11 +5,7 @@ import myStyle from './style.css'
 import axios from "axios";
 import RenderItem from "./RenderItem";
 import mainColor from "./MainColor";
-
-
-
-
-
+import PreviouslySearch from "./PreviouslySearch";
 
 
 
@@ -26,20 +22,38 @@ export default class Search extends Component{
             imageUrl: "Not yet",
         };
 
+        // this.checkPrevious = false;
+
         this.handleSearchButton = this.handleSearchButton.bind(this);
+
+
+        // if (PreviouslySearch.getSearchResult() !== null) {
+        //     this.checkPrevious = true;
+        //     this.handleSearchButton();
+        // }
     }
+
+
 
     handleSearchInput(event){
         searchValue = event.target.value;
+        // this.checkPrevious = false;
     }
 
 
-    handleSearchButton(event){
+    handleSearchButton(){
         console.log(searchValue);
+
+        // if(this.checkPrevious){
+        //     searchValue = PreviouslySearch.getSearchResult().q;
+            // PreviouslySearch.setSearchResult(null);
+            // document.getElementById('button-addon2').click();
+        // }
 
 
         // axios.post('http://localhost:4000/test', {searchValue})
         //     .then(res => console.log(res))
+
 
 
         const options = {
@@ -52,16 +66,18 @@ export default class Search extends Component{
             }
         };
 
-        axios.request(options).then((response) =>{
-            console.log(response.data);
+        axios.request(options).then((response) => {
+            // console.log(response.data);
 
-            console.log(this.state.result);
+            // console.log(this.state.result);
 
-            this.setState( () => ({result: response.data.d, imageUrl: response.data.d}));
+            this.setState(() => ({result: response.data.d, imageUrl: response.data.d}));
+            PreviouslySearch.setSearchResult(response.data);
 
         }).catch(function (error) {
             console.error(error);
         });
+
     }
 
 
@@ -86,7 +102,7 @@ export default class Search extends Component{
                             {
                                 this.state.result !== "Not yet" ? this.state.result.map((value, index) => {
                                     try {
-                                        console.log(value.i.imageUrl);
+                                        // console.log(value.i.imageUrl);
                                         return <RenderItem label={value.l} imgSrc={value.i.imageUrl} actors={value.s} year={value.y} rank={value.rank} type={value.q}/>
                                     }catch (e) {
                                         console.log(e);

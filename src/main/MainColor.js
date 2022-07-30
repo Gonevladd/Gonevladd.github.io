@@ -9,7 +9,7 @@ class mainColor {
     }
 
     static getColor(){
-        console.log(this.color);
+        // console.log(this.color);
         return this.color;
     }
 }

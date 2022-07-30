@@ -17,7 +17,7 @@ export default function Header(){
     return(
             <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">Film rates</Navbar.Brand>
+                    <Navbar.Brand href="/">Film rates</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -25,7 +25,7 @@ export default function Header(){
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="#action1">Home</Nav.Link>
+                            <Nav.Link href="/">Home</Nav.Link>
                             <NavDropdown title="Theme" id="navbarScrollingDropdown">
                                 <NavDropdown.Item onClick={chooseColor}>Primary</NavDropdown.Item>
                                 <NavDropdown.Item onClick={chooseColor}>Secondary</NavDropdown.Item>

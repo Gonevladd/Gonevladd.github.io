@@ -1,9 +1,19 @@
 import React from "react";
+import {useState} from "react";
 import {Image, Button, Card} from "react-bootstrap";
+import {Route, Link, Routes} from "react-router-dom";
 import style from "./style.css"
 import MainColor from "./MainColor";
+import FullInfoPage from "./FullInfoPage";
 
 export default function RenderItem(param){
+    const [checkFullPage, setCheckFullPage] = useState(false);
+
+    let log = () => {
+        // return <Route exact path="/FullPage" component={FullInfoPage}></Route>
+        setCheckFullPage(true);
+        console.log(checkFullPage);
+    }
 
     return(
         <>
@@ -13,11 +23,13 @@ export default function RenderItem(param){
                     <Card.Title>{param.label}</Card.Title>
                     <Card.Text>
                         Actors: {param.actors+'\n'} <br/>
-                        {/*Year: {param.year+'\n'} <br/>*/}
                         Type: {param.type+'\n'} <br/>
-                        {/*Rank: {param.rank+'\n'} <br/>*/}
                     </Card.Text>
-                    <Button variant={MainColor.getColor()}>Go somewhere</Button>
+                    <Link to={`/Movies/${param.label}`} state={{from: param}} id="open_btn">
+                        <Button variant={MainColor.getColor()} onClick={log}>
+                            Open
+                        </Button>
+                    </Link>
                 </Card.Body>
             </Card>
         </>
