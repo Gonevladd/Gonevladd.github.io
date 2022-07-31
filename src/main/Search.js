@@ -1,6 +1,6 @@
 import React from "react";
 import {Component} from "react";
-import {InputGroup, Form, Button, Image, Row} from "react-bootstrap";
+import {InputGroup, Form, Button, Alert, Row, Spinner} from "react-bootstrap";
 import myStyle from './style.css'
 import axios from "axios";
 import RenderItem from "./RenderItem";
@@ -20,6 +20,8 @@ export default class Search extends Component{
         this.state = {
             result: "Not yet",
             imageUrl: "Not yet",
+            showLoading: "Not yet",
+            showError: false
         };
 
         // this.checkPrevious = false;
@@ -43,6 +45,8 @@ export default class Search extends Component{
 
     handleSearchButton(){
         console.log(searchValue);
+
+        this.setState(() => ({showLoading: "Yes"}));
 
         // if(this.checkPrevious){
         //     searchValue = PreviouslySearch.getSearchResult().q;
@@ -71,7 +75,14 @@ export default class Search extends Component{
 
             // console.log(this.state.result);
 
-            this.setState(() => ({result: response.data.d, imageUrl: response.data.d}));
+            console.log(response.data.message);
+            if(response.data.symbol === null){
+                console.log('Bad data');
+                this.setState(() => ({result: "Not yet", imageUrl: "Not yet", showLoading: "No yet", showError: true}));
+                return;
+            }
+
+            this.setState(() => ({result: response.data.d, imageUrl: response.data.d, showLoading: "No yet"}));
             PreviouslySearch.setSearchResult(response.data);
 
         }).catch(function (error) {
@@ -97,13 +108,31 @@ export default class Search extends Component{
                     </Button>
                 </InputGroup>
 
+                {
+                    this.state.showLoading === "Yes" ? <Spinner animation="border" variant={mainColor.getColor()} id="loading-spinner"/> : null
+                }
+
+                <Alert show={this.state.showError} variant={mainColor.getColor()}>
+                    <Alert.Heading>Ooooooooooooops.....</Alert.Heading>
+                    <p>
+                        It seems to be there are not such movies or series. Try to search again in English.
+                    </p>
+                    <hr />
+                    <div className="d-flex justify-content-end">
+                        <Button onClick={() => this.setState(() => ({showError: false}))} variant={"outline-"+mainColor.getColor()}>
+                            Close me!
+                        </Button>
+                    </div>
+                </Alert>
+
+
 
                 <Row xs={1} md={1} className="g-4">
                             {
                                 this.state.result !== "Not yet" ? this.state.result.map((value, index) => {
                                     try {
                                         // console.log(value.i.imageUrl);
-                                        return <RenderItem label={value.l} imgSrc={value.i.imageUrl} actors={value.s} year={value.y} rank={value.rank} type={value.q}/>
+                                        return <RenderItem label={value.l} imgSrc={value.i.imageUrl} actors={value.s} year={value.y} rank={value.rank} type={value.q} data={value}/>
                                     }catch (e) {
                                         console.log(e);
                                     }

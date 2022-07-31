@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from "react";
 import {useLocation} from "react-router-dom";
-import {Button, Image, Carousel, CarouselItem} from "react-bootstrap";
+import {Button, Image, Carousel, Card, Row} from "react-bootstrap";
 import Header from "./Header";
 import style from "./style.css"
 import MainColor from "./MainColor";
@@ -19,47 +19,102 @@ export default function FullInfoPage(param){
 
     return(
         <>
-            <Header></Header>
-            <h1>{from.label}</h1>
-        <Carousel activeIndex={index} onSelect={handleSelect} className="carousel_item">
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src={from.imgSrc}
-                    alt="First slide"
-                />
-                <Carousel.Caption>
-                    {/*<h3>{from.label}</h3>*/}
-                    {/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="holder.js/800x400?text=Second slide&bg=282c34"
-                    alt="Second slide"
-                />
+            <div className="background">
+                <div className="poster_header">
+                    <Header></Header>
+                    <Image src={from.imgSrc} id="poster"></Image>
+                    <h1 id="poster_label">{from.label}</h1>
+                </div>
 
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="holder.js/800x400?text=Third slide&bg=20232a"
-                    alt="Third slide"
-                />
+                <div className="description">
+                    <h1 id="poster_description">Description</h1>
 
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                    </p>
-                </Carousel.Caption>
-            </Carousel.Item>
-        </Carousel>
-            </>
+                    <Row>
+                        <Row>
+                            <Card style={{ width: '18rem' }} className="descriptio_item">
+                                <Card.Img variant="top" src="https://cdn-icons-png.flaticon.com/512/409/409820.png" />
+                                <Card.Body>
+                                    <Card.Title>Actors</Card.Title>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the
+                                        bulk of the card's content.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Row>
+
+
+                        <Row>
+                            <Card style={{ width: '18rem' }} className="descriptio_item">
+                                <Card.Img variant="top" src="https://static.thenounproject.com/png/2080614-200.png" />
+                                <Card.Body>
+                                    <Card.Title>Year</Card.Title>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the
+                                        bulk of the card's content.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Row>
+
+
+                        <Row>
+                            <Card style={{ width: '18rem' }} className="descriptio_item">
+                                <Card.Img variant="top" src="https://cdn-icons-png.flaticon.com/512/2282/2282510.png" />
+                                <Card.Body>
+                                    <Card.Title>Rank</Card.Title>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the
+                                        bulk of the card's content.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Row>
+
+
+                        <Row>
+                            <Card style={{ width: '18rem' }} className="descriptio_item">
+                                <Card.Img variant="top" src="https://i.pinimg.com/originals/aa/f7/05/aaf705e06726ce3881288ae4be3ac5fe.jpg" />
+                                <Card.Body>
+                                    <Card.Title>Type</Card.Title>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the
+                                        bulk of the card's content.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Row>
+
+                    </Row>
+
+
+                    <Carousel activeIndex={index} onSelect={handleSelect} className="carousel_item">
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={from.data.v[0].i.imageUrl}
+                                alt="First slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={from.data.v[1].i.imageUrl}
+                                alt="Second slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={from.data.v[2].i.imageUrl}
+                                alt="Third slide"
+                            />
+                        </Carousel.Item>
+                    </Carousel>
+                </div>
+
+
+            </div>
+        </>
     );
 }
