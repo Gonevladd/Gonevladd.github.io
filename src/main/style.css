@@ -64,10 +64,65 @@
     font-size: 40px;
 }
 
-.descriptio_item{
+.description_item{
     margin-top: 20px;
-    margin-right: 60px;
-    margin-left: 40px;
+    margin-right: 90px;
+    margin-left: 90px;
     margin-bottom: 40px;
     text-align: center;
+}
+
+.description_item_label{
+    font-family: 'Play', sans-serif;
+    font-size: 40px;
+}
+
+.description_item_text{
+    font-family: 'Play', sans-serif;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.success{
+    color: rgb(42, 174, 71);
+}
+
+.primary{
+    color: rgb(0, 106, 255);
+}
+
+.secondary{
+    color: rgb(123, 134, 142);
+}
+
+.danger{
+    color: rgb(238, 41, 60);
+}
+
+.warning{
+    color: rgb(255, 208, 0);
+}
+
+.info{
+    color: rgb(19, 132, 150);
+}
+
+.light{
+    color: rgb(226, 230, 234);
+}
+
+.dark{
+    color: rgb(35, 39, 43);
 }
